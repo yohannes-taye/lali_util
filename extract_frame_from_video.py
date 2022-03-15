@@ -5,10 +5,10 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--input",
                 required=True,
-                help="Path to folder")
+                help="Path to video source")
 ap.add_argument("-o", "--output",
                 required=True,
-                help="Path to folder")
+                help="Path to outptut folder")
 
 
 
