@@ -11,7 +11,7 @@ import glob
 from tqdm import tqdm
 
 
-def frame_to_video(images_folder, output_folder, file_name, fps): 
+def frame_to_video(images_folder, output_folder, file_name, fps=30): 
     print("Converting to video..")
     img_array = []
     size = None 
@@ -27,21 +27,3 @@ def frame_to_video(images_folder, output_folder, file_name, fps):
         out.write(img_array[i])
     out.release()
     print(f"Video saved at {output_folder}/{file_name}.avi")
-
-
-ap = argparse.ArgumentParser()
- 
-ap.add_argument("-i", "--image",
-                required=True,
-                help="Path to folder")
-ap.add_argument("-o", "--output",
-                required=True, 
-                help="Output folder path")
-# ap.add_argument("-d", "--dimention", 
-#                 required=True, 
-#                 help="width/height")
-ap.add_argument("-f", "--fps", 
-                required=True, 
-                help="FPS")
-
- 
