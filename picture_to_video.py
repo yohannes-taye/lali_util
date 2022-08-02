@@ -44,16 +44,31 @@ fps = int(args["fps"])
 #     output.write(img)
 # output.release()
  
+def create_avi(): 
+    img_array = []
+    size = None 
+    for filename in tqdm(sorted(glob.glob(f'{mypath}/*jpg')), desc="Reading Frames"):
+        img = cv2.imread(filename)
+        height, width, layers = img.shape
+        size = (width,height)
+        img_array.append(img)
+    
+    out = cv2.VideoWriter(f'{outputpath}/video.avi',cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
+    for i in tqdm(range(len(img_array)), desc="Creating video"):
+        out.write(img_array[i])
+    out.release()
+
+
 
 img_array = []
 size = None 
-for filename in tqdm(sorted(glob.glob(f'{mypath}/*png')), desc="Reading Frames"):
+for filename in tqdm(sorted(glob.glob(f'{mypath}/*jpg')), desc="Reading Frames"):
     img = cv2.imread(filename)
     height, width, layers = img.shape
     size = (width,height)
     img_array.append(img)
- 
-out = cv2.VideoWriter(f'{outputpath}/video.avi',cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
+
+out = cv2.VideoWriter(f'{outputpath}/video.mp4',cv2.VideoWriter_fourcc(*'MP4V'), fps, size)
 for i in tqdm(range(len(img_array)), desc="Creating video"):
     out.write(img_array[i])
 out.release()

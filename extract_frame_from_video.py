@@ -1,5 +1,15 @@
 import cv2
 import argparse
+import os
+
+def create_dir(d):
+    """ Create a directory if it does not exist
+    Args:
+        d: directory to create
+    """
+    if not os.path.exists(d):
+        os.makedirs(d)
+
  
 # Argument parsing variable declared
 ap = argparse.ArgumentParser()
@@ -17,11 +27,12 @@ args = vars(ap.parse_args())
 # Find all the images in the provided images folder
 input_source = args["input"]
 destination_folder = args["output"]
-
+create_dir(destination_folder)
 
 vidcap = cv2.VideoCapture(input_source)
 success,image = vidcap.read()
 count = 0
+
 
 
 
