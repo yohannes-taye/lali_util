@@ -12,27 +12,17 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image",
                 required=True,
                 help="Path to folder")
-ap.add_argument("-o", "--output",
-                required=False, 
-                help="Output folder path")
 
 args = vars(ap.parse_args())
  
-# if not os.path.exists(d):
-#     os.makedirs(d)
-# Find all the images in the provided images folder
 mypath = args["image"]
-outputpath = args["output"]
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
-images = numpy.empty(len(onlyfiles), dtype=object)
  
 # Iterate through every image
 # and resize all the images.
 for n in range(0, len(onlyfiles)):
- 
-    path = join(mypath, onlyfiles[n])
     file_extention = onlyfiles[n].split('.')[-1]
-    new_name = join(mypath, f'{n + 2202}.{file_extention}')
-    os.rename(path, new_name)
+    if file_extention != "JPG":
+        print(onlyfiles[n])
  
-print("Files renamed successfully")
+print("Done!")

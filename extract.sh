@@ -1,0 +1,2 @@
+python extract_frame_from_video.py -i "/media/tmc/New Volume/Data/depth_data/A007_08051145_C036.mov" -o "/media/tmc/New Volume/Data/depth_data/A007_08051145_C036" &
+python extract_frame_from_video.py -i "/media/tmc/New Volume/Data/depth_data/A007_08051146_C037.mov" -o "/media/tmc/New Volume/Data/depth_data/A007_08051146_C037"

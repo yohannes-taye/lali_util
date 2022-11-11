@@ -66,4 +66,4 @@ for n in tqdm(range(0, len(onlyfiles))):
     
     cv2.imwrite(f'{outputpath}/{onlyfiles[n]}', numpy_horizontal)
 
-print("Images resized Successfully")
+print("Images combined Successfully")
