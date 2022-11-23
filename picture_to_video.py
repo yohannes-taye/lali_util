@@ -7,6 +7,7 @@ import argparse
 import numpy
 import glob
 from tqdm import tqdm
+import debugpy
 
 ap = argparse.ArgumentParser()
  
@@ -26,10 +27,18 @@ ap.add_argument("-f", "--fps",
                 required=True, 
                 help="FPS")
 
+ap.add_argument("-d", "--debug", help='Debug mode', action='store_true', default=False)
+
 
 
 
 args = vars(ap.parse_args())    
+
+if args["debug"]:
+    print("Press play!")
+
+    debugpy.listen(5678)
+    debugpy.wait_for_client()
 
 mypath = args["image"]
 outputpath = args["output"]
@@ -65,11 +74,31 @@ def create_avi():
 
 
 
+
+
 img_array = []
+img_names = []
 size = None 
+
 for filename in tqdm(sorted(glob.glob(f'{mypath}/*')), desc="Reading Frames"):
-    img = cv2.imread(filename)
-    height, width, layers = img.shape
+    img_names.append(filename)
+
+full_path = "/".join((img_names[0].split("/")[0:-1]))
+
+img_names2 = []
+for filename in img_names:
+    #remove the path and the extension
+    img_name = filename.split("/")[-1].split(".")[0] 
+    img_names2.append(int(img_name))
+
+img_names2.sort() 
+
+for filename in img_names2: 
+    img = cv2.imread(f"{full_path}/{filename}.png")
+    try: 
+        height, width, layers = img.shape
+    except:
+        continue 
     size = (width,height)
     img_array.append(img)
 
