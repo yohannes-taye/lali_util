@@ -86,6 +86,7 @@ for filename in tqdm(sorted(glob.glob(f'{mypath}/*')), desc="Reading Frames"):
 full_path = "/".join((img_names[0].split("/")[0:-1]))
 
 img_names2 = []
+extention = img_names[0].split(".")[-1]
 for filename in img_names:
     #remove the path and the extension
     img_name = filename.split("/")[-1].split(".")[0] 
@@ -94,7 +95,7 @@ for filename in img_names:
 img_names2.sort() 
 
 for filename in img_names2: 
-    img = cv2.imread(f"{full_path}/{filename}.png")
+    img = cv2.imread(f"{full_path}/{filename}.{extention}")
     try: 
         height, width, layers = img.shape
     except:

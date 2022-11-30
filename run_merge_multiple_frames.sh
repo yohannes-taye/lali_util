@@ -6,6 +6,7 @@ python ./merge_multiple_frames.py \
     -i /home/tmc/project/AdelaiDepth/LeReS/Train/scripts/output/depth_test \
     -f depth \
     -o $output_path \
+    -x base_line \
     # -d \
 
 python ./picture_to_video.py \

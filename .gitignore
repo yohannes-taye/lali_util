@@ -2,3 +2,4 @@ project.avi
 media/tmc/New Volume/junk/split/
 __pycache__/ 
 .vscode/launch.json
+test/

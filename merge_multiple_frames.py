@@ -10,6 +10,7 @@ def main():
     parser.add_argument('-f', '--image_folder', help='Image folder', required=True)
     parser.add_argument('-o', '--output_folder', help='Output folder', required=True)
     parser.add_argument('-s', '--show_image', help="Show image before saving",  action='store_true', default=False)
+    parser.add_argument('-x', '--ignore_folders', nargs='+', help="List of folders to ignore")
     args = parser.parse_args() 
 
     if args.debug:
@@ -19,8 +20,12 @@ def main():
 
     #Get all folders in input folder
     folders = [f for f in os.listdir(args.input_folder) if os.path.isdir(os.path.join(args.input_folder, f))]
+    
     images = {}
     for folder in folders: 
+        if args.ignore_folders and folder in args.ignore_folders:
+            print(f"Ignoring folder {folder}")
+            continue
         path = os.path.join(args.input_folder, folder, args.image_folder)
         images[folder] = [os.path.join(path, f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]   
         images[folder].sort() 
@@ -34,6 +39,8 @@ def main():
         for key in keys:
             img = cv2.imread(images[key][i])
             #Add big red text to top left corner
+            # cv2.putText(img, f"Stage {key}", (30, 120), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 255), 4)
+
             cv2.putText(img, f"Stage {key}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
             frame.append(img)
         #Merge all images into one

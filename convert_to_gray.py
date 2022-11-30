@@ -31,8 +31,8 @@ for n in range(0, len(onlyfiles)):
     # Load the image in img variable
     img = cv2.imread(path, 1)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    print(f"Generating data {onlyfiles[n]}")
-    filename = onlyfiles[n].split('.')[0] + '.jpg'
+    print(f"Converting {onlyfiles[n]}")
+    filename = onlyfiles[n].split('.')[0] + '.png'
     cv2.imwrite(f'{outputpath}/{filename}', gray)
  
 print("Data generated Successfully")
